@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-hans">
+<head>
+  <meta charset="UTF-8">
+  <title>数字控制</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+  <meta name="renderer" content="webkit">
+  <meta name="viewport" content="initial-scale=1, minimum-scale=1">
+</head>
+<body>
+
+<label>数字：<input type="text" id="inp-dec"></label> <br>
+<label>整数：<input type="text" id="inp-int"></label>
+
+<script>
+  function parseToDecimal(input){
+    return input.replace(/[^\d^\.]/g, '');
+  }
+  function parseToInt(input){
+    return input.replace(/\D/g, '');
+  }
+
+  document.getElementById('inp-dec').onkeyup = function(){
+    this.value = parseToDecimal(this.value);
+  };
+  document.getElementById('inp-dec').onblur = function(){
+    this.value = this.value ? parseFloat(this.value, 10).toFixed(2) || '' : '';
+  };
+
+  document.getElementById('inp-int').onkeyup = function(){
+    this.value = parseToInt(this.value);
+  };
+  document.getElementById('inp-int').onblur = function(){
+    this.value = parseInt(this.value, 10) || '';
+  };
+</script>
+
+</body>
+</html>

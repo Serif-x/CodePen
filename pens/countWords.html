@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-hans">
+<head>
+  <meta charset="UTF-8">
+  <title>字数统计</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+  <meta name="renderer" content="webkit">
+  <meta name="viewport" content="initial-scale=1, minimum-scale=1">
+  <link rel="stylesheet" href="../libs/normalize.css/normalize.min.css">
+  <script src="../libs/modernizr/modernizr-2.8.3.min.js"></script>
+  <style>
+    textarea {
+      width: 100%;
+      max-width: 100%;
+      min-height: 500px;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+      outline: none;
+      border-style: solid;
+      border-radius: .3em;
+      resize: vertical;
+    }
+  </style>
+</head>
+<body>
+<figure>
+
+  <label>
+    <textarea name="txt" id="txt" cols="50" rows="10"></textarea>
+  </label>
+  <p>字符数（计空格）： <span id="words-blank">0</span></p>
+  <p>字符数（不计空格）： <span id="words-noblank">0</span></p>
+  <p>行数： <span id="lines">0</span></p>
+  <p>中文字符和朝鲜语单词： <span id="words-zh">0</span></p>
+  <p>非中文单词： <span id="words-nozh">0</span></p>
+
+</figure>
+
+<script src="../libs/utils/utils.js"></script>
+<script>
+  var getWords = function(input){
+    var rZH = /[^\x00-\xff]+/gi; // 中文字符
+    var rCRLF = /\n/; // 换行
+    return {
+      wordsWithBlank: function(){
+        return input.length;
+      },
+      wordsWithoutBlank: function(){
+        return input.replace(/\s+/g, '').length;
+      },
+      lines: function(){
+        return input.length > 0 ? input.split(rCRLF).length : 0;
+      },
+      wordsZH: function(){
+        return input.match(rZH) ? input.match(rZH).join('').length : 0;
+      },
+      wordsNoZH: function(){
+        return input.replace(rZH, '').length;
+      }
+    }
+  };
+
+  var txt = document.getElementById('txt');
+  var wordsBlank = document.getElementById('words-blank');
+  var wordsNoBlank = document.getElementById('words-noblank');
+  var lines = document.getElementById('lines');
+  var wordsZH = document.getElementById('words-zh');
+  var wordsNoZH = document.getElementById('words-nozh');
+
+  addEvent(txt, 'change blur keyup', function(){
+    var words = getWords(txt.value);
+    wordsBlank.innerHTML = words.wordsWithBlank();
+    wordsNoBlank.innerHTML = words.wordsWithoutBlank();
+    lines.innerHTML = words.lines();
+    wordsZH.innerHTML = words.wordsZH();
+    wordsNoZH.innerHTML = words.wordsNoZH();
+  });
+</script>
+</body>
+</html>
