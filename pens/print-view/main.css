@@ -1,0 +1,96 @@
+
+@media only screen {
+  .page {
+    margin: 20px auto;
+    padding: 1.5cm 2cm;
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+    overflow: auto;
+    -ms-overflow-style: scrollbar;
+    -ms-word-wrap: normal;
+    word-wrap: normal;
+    border: 1px solid #ebebeb;
+    transform: scale(.9);
+    -webkit-box-shadow: 5px 5px 6px 0 rgba(0,0,0, .3);
+       -moz-box-shadow: 5px 5px 6px 0 rgba(0,0,0, .3);
+            box-shadow: 5px 5px 6px 0 rgba(0,0,0, .3);
+    background: #fff;
+    color: #000;
+    -webkit-transition: all .25s;
+       -moz-transition: all .25s;
+        -ms-transition: all .25s;
+         -o-transition: all .25s;
+            transition: all .25s;
+  }
+  .page-wrap {
+    position: relative;
+  }
+  /* A4 */
+  .a4,
+  .a4.portrait {
+    height: 29.7cm;
+    width: 21cm;
+  }
+  .a4.landscape {
+    height: 21cm;
+    width: 29.7cm;
+  }
+  /* A3 */
+  .a3,
+  .a3.portrait {
+    height: 42cm;
+    width: 29.7cm;
+  }
+  .a3.landscape {
+    height: 29.7cm;
+    width: 42cm;
+  }
+
+  /* other */
+  #page-config {
+    position: fixed;
+    right: 80px;
+    top: 50px;
+    z-index: 9999;
+    padding: 20px;
+    border: 1px solid #eee;
+    background-color: rgba(255,255,255, .8);
+    box-shadow: 0 0 5px 0 rgba(0,0,0, .3);
+    cursor: move;
+  }
+
+  .gp {
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 5px;
+    cursor: default;
+  }
+  .gp label,
+  .gp select {
+    font-size: 14px;
+    vertical-align: middle;
+  }
+  .gp label {
+    display: inline-block;
+    min-width: 6em;
+    text-align: right;
+  }
+  .gp select {
+    display: inline-block;
+    min-width: 6em;
+    text-align: left;
+  }
+
+}
+
+@media print {
+  .page {
+    width: auto !important;
+    height: auto !important;
+    margin: 0;
+    padding: 0;
+    box-shadow: none;
+    border: none;
+  }
+}

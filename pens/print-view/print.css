@@ -1,0 +1,105 @@
+/**
+ * Style for printer
+ *
+ * @file: print.css
+ * @author: Serifx Xiao <Serifx@outlook.com>
+ * @version: 0.0.0
+ *
+ * Further description begins here...
+ */
+
+
+/* ==========================================================================
+   页面设置
+ ============================================================================ */
+body {
+  margin: 1.5cm 2cm;
+  background: #fff;
+  color: #000;
+}
+
+@page {
+  /*size: A4 landscape;*/
+  orphans: 2;
+  widows: 2;
+
+  @bottom-center {
+    content: '- ' counter(page) ' -';
+  }
+}
+
+/*
+ * 左页：（奇数页）
+ */
+@page :left {
+
+}
+/*
+ * 右页：（偶数页）
+ */
+@page :right {
+  @bottom-left {
+    margin: 10pt 0 30pt 0;
+    border-top: .25pt solid #666;
+    content: "My book";
+    font-size: 9pt;
+    color: #333;
+  }
+}
+
+/*
+ * 新文章分页
+ */
+h1,
+article {
+  /*page-break-before: always;*/
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  page-break-after: avoid;
+  page-break-inside:avoid;
+}
+
+/*
+ * 防止图表断开
+ */
+table,
+figure {
+  page-break-inside: avoid;
+}
+
+/*
+ * 防止图片超出纸张
+ */
+img {
+  max-width: 100%;
+}
+
+/* link
+   ========================================================================== */
+a[href] {
+  font-weight: normal;
+  text-decoration: none;
+}
+a[href^=http]:after {
+  content: ' <' attr(href) '> ';
+}
+/* anchor */
+a[href^="#"]:after {
+  content: '';
+}
+
+
+/* ==========================================================================
+   utilities
+ ============================================================================ */
+.page-break {
+  page-break-before: always;
+}
+.no-print {
+  display: none;
+}
