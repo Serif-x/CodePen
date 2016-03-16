@@ -12,9 +12,9 @@
     word-wrap: normal;
     border: 1px solid #ebebeb;
     transform: scale(.9);
-    -webkit-box-shadow: 5px 5px 6px 0 rgba(0,0,0, .3);
-       -moz-box-shadow: 5px 5px 6px 0 rgba(0,0,0, .3);
-            box-shadow: 5px 5px 6px 0 rgba(0,0,0, .3);
+    -webkit-box-shadow: 0 0 50px 0 rgba(0,0,0, .3);
+       -moz-box-shadow: 0 0 50px 0 rgba(0,0,0, .3);
+            box-shadow: 0 0 50px 0 rgba(0,0,0, .3);
     background: #fff;
     color: #000;
     -webkit-transition: all .25s;

@@ -23,14 +23,17 @@
   <div class="gp">
     <label for="orientation">方向：</label>
     <select name="size" id="orientation">
-      <option value="portrait">纵向</option>
       <option value="landscape">横向</option>
+      <option value="portrait">纵向</option>
     </select>
   </div>
 </div>
+<p>
+  <button id="btn-print">打印</button>
+</p>
 
 <!-- 页面 -->
-<div id="page" class="page a4 portrait">
+<div id="page" class="">
 <div class="page-wrap">
 
   <section data-type="chapter">
@@ -94,7 +97,28 @@
 </div>
 </div> <!-- /页面 -->
 
+<script src="../../libs/jquery/jquery-1.11.2.min.js"></script>
 <script src="../../libs/interact.min.js"></script>
 <script src="main.js"></script>
+<script>
+  $(function(){
+    $('#page-config').hide();
+
+    $('#page, #page-config').on('click', function(){
+      return false; // stop bubble
+    });
+
+    $('body').on('click', function(){
+      $('#page').removeAttr('class');
+    });
+
+    $('#btn-print').on('click', function(){
+      $('#page').addClass('page a4 landscape');
+      $('#page-config').fadeIn();
+      return false; // stop bubble
+    });
+
+  });
+</script>
 </body>
 </html>

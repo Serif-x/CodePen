@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-hans">
+<head>
+  <meta charset="UTF-8">
+  <title>递归懵逼</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+  <meta name="renderer" content="webkit">
+  <meta name="viewport" content="initial-scale=1, minimum-scale=1">
+  <link rel="stylesheet" href="mengbi.css">
+</head>
+<body>
+  <div id="holder"></div>
+
+  <script>
+    var COUNT = 10;
+
+    var frag = document.createDocumentFragment();
+    for (i = COUNT; i > 0; i--) {
+      var p = document.createElement('p');
+      for (j = i; j > 0; j--) {
+        printMengbi(p);
+      }
+      frag.appendChild(p);
+    }
+    var holder = document.querySelector('#holder');
+    holder.appendChild(frag);
+
+    function printMengbi(container){
+      var _frag = document.createDocumentFragment();
+      var _img = document.createElement('img');
+      _img.src = 'img/mengbi.jpg';
+      _img.alt = 'mengbi';
+      _img.className = 'mengbi';
+      _frag.appendChild(_img);
+      container.appendChild(_frag);
+    }
+  </script>
+</body>
+</html>

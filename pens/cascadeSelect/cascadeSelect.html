@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="utf-8">
+  <title>级联选择</title>
+  <meta name="X-UA-Compatible" content="IE=edge, chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="renderer" content="webkit">
+</head>
+<body>
+
+<figure class="content">
+  <h2>20151102最新京东地区数据（请在服务器环境下浏览）</h2>
+  <p id="status"></p>
+
+  <div class="form-control">
+    <select class="" name="" id="sel1"></select>
+    <select class="" name="" id="sel2"></select>
+    <select class="" name="" id="sel3"></select>
+    <select class="" name="" id="sel4"></select>
+  </div>
+</figure>
+
+<script>
+  var $$ = function(selector){
+    return document.querySelector(selector);
+  };
+  var isEmpty = function(obj){
+    for (var p in obj) {
+      return false;
+    }
+    return true;
+  }
+
+  function getData(options){
+    var xhr = new XMLHttpRequest();
+    xhr.open(options.method, options.url, true);
+    xhr.onreadystatechange = function(){
+      if(xhr.readyState === 4 && xhr.status === 200){
+        options.success && options.success(xhr.response);
+      }
+    }
+    xhr.responseType = 'json';
+    xhr.send(null);
+  }
+
+  function createOptions(data){
+    var frag = document.createDocumentFragment();
+    for (var k in data) {
+      var opt = document.createElement('option');
+      opt.value = k;
+      opt.innerHTML = data[k];
+      frag.appendChild(opt);
+    }
+    return frag;
+  }
+
+  var sel1 = $$('#sel1');
+
+  // data
+  var provinces = {},
+      citys = [],
+      countrys = {},
+      towns = {};
+
+  window.onload = function(){
+    if(!isEmpty(provinces)){
+      sel1.appendChild(createOptions(provinces));
+    } else {
+      getData({
+        url: 'data/provinces.json',
+        method: 'get',
+        success: function(data){
+          provinces = data;
+          sel1.appendChild(createOptions(provinces));
+        }
+      });
+    }
+  }
+
+  sel1.addEventListener('change', function(){
+    var prov = +sel1.options[sel1.selectedIndex].value;
+    var sel2 = $$('#sel2');
+
+    sel2.innerHTML = '';
+    if(citys.length > 0){
+      sel2.appendChild(createOptions(citys[prov-1]));
+    } else {
+      getData({
+        url: 'data/citys.json',
+        method: 'get',
+        success: function(data){
+          citys = data;
+          sel2.appendChild(createOptions(citys[prov-1]));
+        }
+      });
+    }
+  });
+
+</script>
+</body>
+</html>
