@@ -30,7 +30,7 @@
       return false;
     }
     return true;
-  }
+  };
 
   function getData(options){
     var xhr = new XMLHttpRequest();
@@ -39,7 +39,7 @@
       if(xhr.readyState === 4 && xhr.status === 200){
         options.success && options.success(xhr.response);
       }
-    }
+    };
     xhr.responseType = 'json';
     xhr.send(null);
   }
@@ -76,7 +76,7 @@
         }
       });
     }
-  }
+  };
 
   sel1.addEventListener('change', function(){
     var prov = +sel1.options[sel1.selectedIndex].value;
